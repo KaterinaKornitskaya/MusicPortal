@@ -27,6 +27,15 @@ namespace MusicPortal.Services
             }
             await _context.SaveChangesAsync();
         }
+        public async Task UpdateById(Genre genre)
+        {
+            //var genreForEdit = await _context.Genres.FirstOrDefaultAsync(e => e.Id==id);
+            if (genre != null)
+            {
+                _context.Genres.Update(genre);
+            }
+            await _context.SaveChangesAsync();
+        }
 
         public IEnumerable<Genre> GetAll()
         {
@@ -45,14 +54,10 @@ namespace MusicPortal.Services
             throw new NotImplementedException();
         }
 
-        public async Task Update(Genre entity)
+        public List<Genre>? GenreList()
         {
-            var genreForEdit = await _context.Genres.FindAsync(entity);
-            if (genreForEdit != null)
-            {
-                _context.Genres.Update(genreForEdit);
-            }
-            await _context.SaveChangesAsync();
+            var genreList = _context.Genres.ToList();
+            return genreList;
         }
     }
 }

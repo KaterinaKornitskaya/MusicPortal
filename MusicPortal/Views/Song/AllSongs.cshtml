@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MusicPortal.Models.Song>
+
+<h1>All Songs</h1>
+
+<p>
+    <a asp-action="Create">Додати нову пісню</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model=>model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(e=>item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(e => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(e => item.Genre.Title)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -43,10 +43,7 @@ namespace MusicPortal.Controllers
             }
         }
 
-        public IActionResult Delete()
-        {
-            return View();
-        }
+      
 
         public async Task<IActionResult> Delete(int id)
         {
@@ -56,8 +53,7 @@ namespace MusicPortal.Controllers
             }
 
             var x = await _repository.GetById(id);
-            //Films
-            //    .FirstOrDefaultAsync(m => m.ID == id);
+           
             if (x == null)
             {
                 return NotFound();
@@ -82,18 +78,23 @@ namespace MusicPortal.Controllers
             }
         }
 
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            if (id==null)
+                return NotFound();
+            var genre = await _repository.GetById(id);
+            if (genre == null)
+                return NotFound();
+            return View(genre);
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Genre genre)
+        public async Task<IActionResult> EditThis([Bind] Genre genre)
         {
             try
             {
-                await _repository.Update(genre);
+                await _repository.UpdateById(genre);
                 return RedirectToAction(nameof(AllGenres));
             }
             catch (Exception)
