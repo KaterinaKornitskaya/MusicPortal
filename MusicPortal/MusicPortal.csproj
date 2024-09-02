@@ -17,6 +17,17 @@
 
   <ItemGroup>
     <Folder Include="Views\NewFolder\" />
+    <Folder Include="wwwroot\audio\" />
+    <Folder Include="wwwroot\background\" />
+    <Folder Include="wwwroot\icons\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Song\MySongs.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Song\MySongs.cshtml" />
   </ItemGroup>
 
 </Project>

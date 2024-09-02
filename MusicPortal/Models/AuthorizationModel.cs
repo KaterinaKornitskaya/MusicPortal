@@ -4,17 +4,20 @@ namespace MusicPortal.Models
 {
     public class AuthorizationModel
     {
-        [Required(ErrorMessage = "Поле нужно заполнить!")]
+        [Display(Name ="Логін")]
+        [Required(ErrorMessage = "Поле потрібно заповнити!")]
         [MaxLength(255)]
         public string? Email { get; set; }
 
-        [Required(ErrorMessage = "Поле нужно заполнить!")]
+        [Display(Name = "Пароль")]
+        [Required(ErrorMessage = "Поле потрібно заповнити!")]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
 
-        [Required(ErrorMessage = "Поле нужно заполнить!")]
+        [Display(Name = "Повторити пароль")]
+        [Required(ErrorMessage = "Поле потрібно заповнити!")]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Пароли не совпадают!")]
+        [Compare("Password", ErrorMessage = "Паролі не співпадають")]
         public string? PasswordConfirmed { get; set; }
     }
 }

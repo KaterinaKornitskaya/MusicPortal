@@ -1,4 +1,4 @@
-﻿@model MusicPortal.Models.User
+﻿@model IEnumerable<MusicPortal.Models.Song>
 
 @{
     ViewData["Title"] = "Index";
@@ -8,68 +8,84 @@
 <h1>После авторизации (Index Account)</h1>
 <h3>Hi, @Context.Session.GetString("Email")</h3>
 
-<p>
-    <a asp-action="AllGenres" asp-controller="Genre">Жанри</a>
-</p>
-<p>
-    <a asp-action="AllSongs" asp-controller="Song">Пісні</a>
-</p>
+@{
+    // Model.IsConfirmed == true
+    if (ViewBag.IsAdmin == true)
+    {
+        <div>
+            <p>Аккаунт-Индекс для админов</p>
+            <span> | </span>
+            <span><a asp-action="AllGenres" asp-controller="Genre">Жанри</a></span>
+            <span> | </span>
+            <span><a asp-action="AllSongs" asp-controller="Song">Всі пісні</a></span>
+            <span> | </span>
+            <span> <a asp-action="MySongs" asp-controller="Song">Мої пісні</a></span>
+            <span> | </span>
+            <span><a asp-action="AllUsers" asp-controller="User">Всі користувачі</a></span>
+            <span> | </span>
+        </div>
+    }
+    else if (ViewBag.IsAdmin == false)
+    {
+        <div>
+            <p>Аккаунт-Индекс для обычных юзеров (подтвержденных)</p>
+            <span> | </span>           
+            <span><a asp-action="AllSongs" asp-controller="Song">Всі пісні</a></span>
+            <span> | </span>
+            <span> <a asp-action="MySongs" asp-controller="Song">Мої пісні</a></span>
+            <span> | </span>
+        </div>
+    }
+}
 
 
-@* <p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+
+
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+          
+            <th>
+                @Html.DisplayNameFor(model => model.Genre.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Password)
+                @Html.DisplayNameFor(model => model.Path)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Salt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsAdmin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsConfirmed)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayFor(modelItem => item.Author)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Password)
+                @Html.DisplayFor(modelItem => item.Genre.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Salt)
+                    <div>
+                        <audio controls muted loop src="@Html.DisplayFor(e=>item.Path)" />
+
+                    </div>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAdmin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsConfirmed)
-            </td>
-            <td>
+          
+          @*   <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            </td> *@
         </tr>
 }
     </tbody>
-</table> *@
+</table>

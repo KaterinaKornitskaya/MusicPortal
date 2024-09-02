@@ -5,46 +5,74 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create song</h1>
-
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
+<div> 
+    <form asp-action="Create" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <p>Створення пісні</p>
+        </div>
+        <div class="form-group">
+            <div class="inFormGroup">
+                @* <label asp-for="Title" class="control-label"></label> *@
+                <input type="text" asp-for="Title" class="form-control" placeholder="Title" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
-           @*  <div class="form-group">
-                <label asp-for="Path" class="control-label"></label>
-                <input asp-for="Path" class="form-control" />
-                <span asp-validation-for="Path" class="text-danger"></span>
-            </div> *@
-            <div class="form-group">
-                <label asp-for="Author" class="control-label"></label>
-                <input asp-for="Author" class="form-control" />
+            
+        </div>
+       
+        <div class="form-group">
+            <div class="inFormGroup">
+                @* <label asp-for="Author" class="control-label"></label> *@
+                <input type="text" asp-for="Author" class="form-control" placeholder="Author" />
                 <span asp-validation-for="Author" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Genre" class="control-label"></label>
-              @*   <select asp-for="Genre.Id" class="form-control"/>
-                <select asp-for="Genre.Title" class="form-control" /> *@
-               
-                <select asp-for="@ViewData["GenreId"] class="form-control" />
+            
+        </div>
+    
+        <div class="form-group">
+            <div class="inFormGroup">
+                <select asp-for="GenreId" class="mySelect" asp-items="ViewBag.GenreId"></select>
             </div>
-         
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+            @* <label asp-for="Genre" class="control-label"></label> *@
+           @*  <select asp-for="Genre" class="form-control" asp-items="ViewBag.GenreId" /> *@
+           @*  <select asp-for="Genre.Title" class="form-control" asp-items="ViewBag.GenreId"></select> *@
+                  
+        </div>
 
-<div>
-    <a asp-action="AllSongs">Back to List</a>
+        <div class="form-group">
+           @*  <div class="divForCustomFile"> *@
+                @* <div class="form-group"> *@
+         
+                    <div class="customFileUpload">
+                        <input type="file" name="uploadedFilePath" asp-for="Image" />
+                        Вибрати пісню
+                    </div>
+                    @*  <label asp-for="Path" class="control-label"></label>
+                    <input type="file" name="uploadedFilePath" asp-for="Path" class="form-control" /> *@
+                    <span asp-validation-for="Path" class="text-danger"></span>
+               @*  </div> *@
+               
+               @*  <div class="form-group"> *@
+                    <div class="customFileUpload">
+                        <input type="file" name="uploadedFileImage" asp-for="Path" />
+                        Вибрати зображення
+                    </div>
+                    @*  <label asp-for="Image" class="control-label"></label>
+                    <input type="file" name="uploadedFileImage" asp-for="Image" class="form-control" /> *@
+                    <span asp-validation-for="Image" class="text-danger"></span>
+               @*  </div> *@
+          @*   </div> *@
+            
+        </div>
+      
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    
+        <div>
+            <a asp-action="AllSongs" asp-controller="Song">Назад до пісень</a>
+        </div>
+    </form>  
 </div>
 
 @section Scripts {

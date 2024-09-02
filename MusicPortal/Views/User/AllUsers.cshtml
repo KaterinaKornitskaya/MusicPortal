@@ -1,0 +1,131 @@
+﻿@model IEnumerable<MusicPortal.Models.User>
+
+@{
+    ViewData["Title"] = "AllUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper">
+    <aside class="asideMenu">
+        <div>
+            <ul>
+                @if (ViewBag.IsAdmin == true)
+                {
+                    <li>
+                        <a asp-action="Create" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                add_circle
+                            </span>
+                            Додати нову пісню
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-action="AllSongs" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                library_music
+                            </span>
+                            <span>Всі пісні</span>
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-action="MySongs" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                genres
+                            </span>
+                            Мої пісні
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-action="AllGenres" asp-controller="Genre">
+                            <span class="material-symbols-outlined">
+                                group
+                            </span>
+                            Жанри
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a asp-action="Create" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                add_circle
+                            </span>
+                            Додати нову пісню
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-action="AllSongs" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                library_music
+                            </span>
+                            <span>Всі пісні</span>
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-action="MySongs" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                genres
+                            </span>
+                            Мої пісні
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </aside>
+
+    <article class="articleOneCol">
+        <div class="orangeBack width100">
+            @* <p>
+                <a asp-action="Create" asp-controller="Genre" class="linkDo">Створити новий жанр</a>
+            </p> *@
+
+            <table class="genreTable">
+                <tr>
+                    <td>@Html.DisplayNameFor(e => e.Name)</td>
+                    <td>@Html.DisplayNameFor(e => e.Email)</td>
+                    <td>@Html.DisplayNameFor(e => e.IsConfirmed)</td>
+                    <td>@Html.DisplayNameFor(e => e.IsAdmin)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>@Html.DisplayFor(e => item.Email)</td>
+                        <td>
+
+                            <input type="checkbox" asp-for="@item.IsConfirmed" />
+
+                        </td>
+                        <td>
+                            <input type="checkbox" asp-for="@item.IsAdmin" class="custom-checkbox" id="happy" name="happy" />
+                            <label for="happy"></label>
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="linkBack">Деталі</a>
+                        </td>
+                        <td>
+                            <a asp-action="ConfirmUser" asp-route-id="@item.Id" class="linkBack">Підтвердити</a>
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="linkBack">Видалити</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </article>
+</div>

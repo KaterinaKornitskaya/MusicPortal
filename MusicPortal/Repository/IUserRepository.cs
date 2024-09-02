@@ -9,6 +9,10 @@ namespace MusicPortal.Repository
         Task<User> CreateUser(User user, RegisterModel model);
         bool LogIn(AuthorizationModel authModel);
         Task AddUserToDB(User user);
-        Task<IEnumerable<User>> GetAllUsers();        
+        IEnumerable<User> GetAllUsers();         
+        User GetUserById(int id);
+        Task ConfirmUser(int id);
+        User GetUserByEmail(string email);
+        Task DeleteById(int id);
     }
 }

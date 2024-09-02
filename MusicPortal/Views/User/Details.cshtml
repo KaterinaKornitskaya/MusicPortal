@@ -1,0 +1,37 @@
+﻿@model MusicPortal.Models.User
+
+<div>
+    <p asp-for="Name"></p>
+    <p>@Html.DisplayNameFor(e=>e.Name)</p>
+    <p>@Html.DisplayFor(e => e.Name)</p>
+    <p>@Html.DisplayNameFor(e => e.Email)</p>
+    <p>@Html.DisplayFor(e => e.Email)</p>
+    <p>IsAdmin</p>
+    <div>
+        <input type="checkbox" asp-for="@Model.IsAdmin" />
+    </div>
+    <p>IsConfirmed</p>
+    <div>
+        <input type="checkbox" asp-for="@Model.IsConfirmed" />
+    </div>
+    <div>
+      
+        <p>**********************************************************************</p>
+     
+
+        @foreach (var item in ViewBag.SongList)
+        {
+           
+           
+            <p>@item.Title</p>
+            <p>@item.Author</p>
+            <p>
+                <audio controls muted loop src="@item.Path"/>
+            </p>
+        }
+
+
+
+    </div>
+    <p>**********************************************************************</p>
+</div>

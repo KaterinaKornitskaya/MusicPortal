@@ -1,0 +1,58 @@
+﻿@model MusicPortal.Models.User
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <form asp-action="Delete" asp-controller="User">
+        <div>
+            <p>Видалення користувача</p>
+        </div>
+        <table class="songTable">
+            <tr>
+                <td>
+                    <p>@Html.DisplayNameFor(e => e.Name):</p>
+                </td>
+                <td>
+                    <p>@Html.DisplayFor(e => e.Name)</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>@Html.DisplayNameFor(e => e.Email):</p>
+                </td>
+                <td>
+                    <p>@Html.DisplayFor(e => e.Email)</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>@Html.DisplayNameFor(e => e.IsConfirmed):</p>
+                </td>
+                <td>
+                    <p>@Html.DisplayFor(e => e.IsConfirmed)</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>@Html.DisplayNameFor(e => e.IsAdmin):</p>
+                </td>
+                <td>
+                    <p>@Html.DisplayFor(e => e.IsAdmin)</p>
+                </td>
+            </tr>
+        </table>
+
+        <div class="form-group">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Видалити" class="btn btn-danger" />
+        </div>
+
+        <div>
+            <a asp-action="AllUsers" class="linkBack">Назад до списку користувачів</a>
+        </div>
+    </form>
+</div>
+

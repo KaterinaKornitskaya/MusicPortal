@@ -1,4 +1,6 @@
-﻿using MusicPortal.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using MusicPortal.Models;
 using MusicPortal.Repository;
 using System.Security.Cryptography;
 
@@ -48,8 +50,8 @@ namespace MusicPortal.Services
                 user.Salt = salt;
                 user.Name = name;
                 user.Email = email;
-                user.IsAdmin = true;
-                user.IsConfirmed = true;
+                user.IsAdmin = false;
+                user.IsConfirmed = false;
             });
             return user;
         }
@@ -82,17 +84,50 @@ namespace MusicPortal.Services
             return loginOk;
         }
 
-        public async Task<IEnumerable<User>> GetAllUsers()
+        public IEnumerable<User> GetAllUsers()
         {
-            var users = new List<User>();
-            await Task.Run(() =>
+            //var userList = new List<User>();
+            //Task.Run(() =>
+            //{
+            //    userList = _context.Users.Include(e => e.Songs).ToList();
+
+            //});
+            //return userList;
+            var userList = _context.Users.Include(e => e.Songs).ToList();
+            return userList;
+        }
+
+        public User GetUserById(int id)
+        {
+            var user = _context.Users.Include(e=>e.Songs).FirstOrDefault(e=>e.Id == id);
+            return user;
+        }
+
+        public async Task ConfirmUser(int id)
+        {
+            var user = GetUserById(id);
+            if (user != null)
             {
-                foreach (var user in _context.Users)
-                {
-                    users.Add(user);
-                }
-            });          
-            return users;
+                user.IsConfirmed = true;
+                _context.Update(user);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            var user = _context.Users.Include(e=>e.Songs).FirstOrDefault(e=>e.Email==email);
+            return user;
+        }
+
+        public async Task DeleteById(int id)
+        {
+            var user = GetUserById(id);
+            if (user != null) 
+            {
+                _context.Users.Remove(user);
+            }
+            await _context.SaveChangesAsync();
         }
     }
 }

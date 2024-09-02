@@ -5,44 +5,114 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Всі жанри</h1>
-@* <p>
-    <a asp-action="Create" asp-controller="Author">Create New Author</a>
-</p>
-<p>
-    <a asp-action="Delete" asp-controller="Author">Delete Author</a>
-</p>
-<p>
-    <a asp-action="Edit" asp-controller="Author">Edit Author</a>
-</p> *@
+<div class="wrapper">
+    <aside class="asideMenu">
+        <div>
+            <ul>
+                @if (ViewBag.IsAdmin == true)
+                {
+                    <li>
+                        <a asp-action="Create" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                add_circle
+                            </span>
+                            Додати нову пісню
+                        </a>
+                    </li>
 
-<p>
-    <a asp-action="Create" asp-controller="Genre">Створити новий жанр</a>
-</p>
+                    <li>
+                        <a asp-action="AllSongs" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                library_music
+                            </span>
+                            <span>Всі пісні</span>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-           
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-              
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-action="MySongs" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                genres
+                            </span>
+                            Мої пісні
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-action="AllUsers" asp-controller="User">
+                            <span class="material-symbols-outlined">
+                                group
+                            </span>
+                            Користувачі
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a asp-action="Create" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                add_circle
+                            </span>
+                            Додати нову пісню
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-action="AllSongs" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                library_music
+                            </span>
+                            <span>Всі пісні</span>
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-action="MySongs" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                genres
+                            </span>
+                            Мої пісні
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </aside>
+
+    <article class="articleOneCol">
+        <div class="orangeBack">
+            <p>
+                <a asp-action="Create" asp-controller="Genre" class="linkDo">Створити новий жанр</a>
+            </p>
+
+            <table class="genreTable">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="linkBack">Edit</a>
+                        </td>
+                        <td>
+                           <a asp-action="Delete" asp-route-id="@item.Id" class="linkBack">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+            @* <p>
+                <a asp-action="AllGenres" asp-controller="Genre" class="linkBack">Назад до списку жанрів</a>
+            </p> *@
+        </div>
+    </article>
+</div>
+
+
+
+
+

@@ -9,6 +9,6 @@
         public string Salt { get; set; }
         public bool IsAdmin { get; set; }
         public bool IsConfirmed { get; set; }
-        public IEnumerable<Song> Songs { get; set; }  
+        public virtual IEnumerable<Song> Songs { get; set; }  
     }
 }

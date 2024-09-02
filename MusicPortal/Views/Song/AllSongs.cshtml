@@ -1,40 +1,126 @@
 ﻿@model IEnumerable<MusicPortal.Models.Song>
 
-<h1>All Songs</h1>
 
-<p>
-    <a asp-action="Create">Додати нову пісню</a>
-</p>
+<div class="wrapper">
+    <aside class="asideMenu">
+        <div>
+            <ul>
+                @if (ViewBag.IsAdmin == true)
+                {
+                    <li>
+                        <a asp-action="Create" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                add_circle
+                            </span>
+                            Додати нову пісню
+                        </a>
+                    </li>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model=>model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model=>model.Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-        </tr>
-    </thead>
+                    <li>
+                        <a asp-action="AllSongs" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                library_music
+                            </span>
+                            <span>Всі пісні</span>
 
-    <tbody>
-        @foreach(var item in Model)
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-action="MySongs" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                genres
+                            </span>
+                            Мої пісні
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-action="AllGenres" asp-controller="Genre">
+                            <span class="material-symbols-outlined">
+                                theater_comedy
+                            </span>
+                            Жанри
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-action="AllUsers" asp-controller="User">
+                            <span class="material-symbols-outlined">
+                                group
+                            </span>
+                            Користувачі
+                        </a>
+                    </li>                    
+                }
+                else
+                {
+                    <li>
+                        <a asp-action="Create" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                add_circle
+                            </span>
+                            Додати нову пісню
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-action="AllSongs" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                library_music
+                            </span>
+                            <span>Всі пісні</span>
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-action="MySongs" asp-controller="Song">
+                            <span class="material-symbols-outlined">
+                                genres
+                            </span>
+                            Мої пісні
+                        </a>
+                    </li>
+                }                            
+            </ul>
+        </div>
+    </aside>
+
+    <article>
+        @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(e=>item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(e => item.Author)
-                </td>
-                <td>
-                    @Html.DisplayFor(e => item.Genre.Title)
-                </td>
-            </tr>
+           
+            <div class="songCard">
+                <div class="songImage">
+                    <img src="@Html.DisplayFor(e=>item.Image)"/>
+                </div>
+
+                <div class="songTitle">
+                    <span>@Html.DisplayFor(e => item.Title)</span>
+                </div>
+
+                <div class="songAuthor">
+                    <span>@Html.DisplayFor(e => item.Author)</span>
+                </div>
+
+                <div class="songGenre">
+                    <span>@Html.DisplayFor(e => item.Genre.Title)</span>
+                </div>
+
+                <div class="songAudio">
+                    <audio controls muted loop src="@Html.DisplayFor(e=>item.Path)" />
+                </div>
+
+                <div class="cardEdit">
+                    @* <a asp-action="Edit" asp-controller="Song" asp-route-id="@item.Id">Edit</a> *@
+                    <a asp-action="Delete" asp-controller="Song" asp-route-id="@item.Id">
+                        <span class="material-symbols-outlined spanDelete">
+                            delete
+                        </span>
+                    </a>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </article>
+</div>

@@ -7,19 +7,28 @@ namespace MusicPortal.Controllers
 {
     public class GenreController : Controller
     {
-        IMusicRepository<Genre> _repository;
-        public GenreController(IMusicRepository<Genre> repository)
+        IMusicRepository<Genre> _genreRepository;
+        IUserRepository _userRepository;
+        public GenreController(IMusicRepository<Genre> genreRepository, IUserRepository userRepository)
         {
-            _repository=repository;
+            _genreRepository = genreRepository;
+            _userRepository = userRepository;
+        }
+
+        private void IsAdmin()
+        {
+            string email = HttpContext.Session.GetString("Email");
+            var user = _userRepository.GetUserByEmail(email);
+            if (user.IsAdmin == true)
+                ViewBag.IsAdmin = true;
+            else
+                ViewBag.IsAdmin = false;
         }
 
         public IActionResult AllGenres()
         {
-            //return _repository.GetAll() != null 
-            //    ? View(  _repository.GetAll()) 
-            //    : Problem("Entity set 'SoccerContext.Teams'  is null.");
-           
-            return View(_repository.GetAll());
+            IsAdmin();
+            return View(_genreRepository.GetAll());
         }
 
         public IActionResult Create()
@@ -29,30 +38,27 @@ namespace MusicPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Genre genre)
+        public async Task<IActionResult> Create(Genre genre, IFormFile? uploadedFile, IFormFile? uploadedFile2)
         {
             try
             {
-                await _repository.Create(genre);
-                return View(genre);
-               // return RedirectToAction(nameof(Index));
+                await _genreRepository.Create(genre, uploadedFile, uploadedFile2);
+                return RedirectToAction(nameof(AllGenres));
             }
             catch (Exception)
             {
                 return RedirectToAction(nameof(AllGenres));
             }
-        }
+        }      
 
-      
-
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var x = await _repository.GetById(id);
+            var x = await _genreRepository.GetById(id);
            
             if (x == null)
             {
@@ -65,11 +71,10 @@ namespace MusicPortal.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-          
+        {  
             try
             {
-                await _repository.DeleteById(id);
+                await _genreRepository.DeleteById(id);
                 return RedirectToAction(nameof(AllGenres));
             }
             catch (Exception)
@@ -78,11 +83,11 @@ namespace MusicPortal.Controllers
             }
         }
 
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id==null)
                 return NotFound();
-            var genre = await _repository.GetById(id);
+            var genre = await _genreRepository.GetById(id);
             if (genre == null)
                 return NotFound();
             return View(genre);
@@ -94,7 +99,7 @@ namespace MusicPortal.Controllers
         {
             try
             {
-                await _repository.UpdateById(genre);
+                await _genreRepository.UpdateById(genre);
                 return RedirectToAction(nameof(AllGenres));
             }
             catch (Exception)

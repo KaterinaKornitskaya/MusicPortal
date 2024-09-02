@@ -1,3 +1,4 @@
+
 html {
   font-size: 14px;
 }
@@ -17,6 +18,370 @@ html {
   min-height: 100%;
 }
 
+header {
+    /*border: 1px solid yellow;*/
+    border-bottom: 1px solid black;
+    background: rgba(102,68,0, 0.95);
+    width: 100%;
+    height: 4em;
+    color: white;
+}
+
+header ul{
+    height: 100%;
+    /*border: 1px solid red;*/
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+header ul li {
+   /* border: 1px solid red;*/
+    display: inline-block;
+    list-style-type: none;
+}
+
+header ul li .mainMenu {
+    border: none;
+    text-decoration: none;
+    color: rgb(255,255,179);
+    font-weight: 500;
+    font-size: 20px;
+    padding: 8px 0px;
+    margin: 0 16px;
+    transition: 0.4s;
+}
+
+header ul li .mainMenu:hover {
+    transition: 0.4s;
+    color: rgb(255,170,0);
+    border-bottom: 1px solid rgba(255,170,0, 0.95);
+}
+
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background: url("../background/background11.jpg");
+    background-size: 300px 250px;
+    color: black;
+}
+
+main {
+    /*border: 1px solid red;*/
+    width: 100%;
+    margin: 10px auto;
+    padding: 8px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    color: black;
+}
+
+.linkBack {
+    border-bottom: none;
+}
+
+.linkBack:hover {
+    color: black;
+    border-bottom: 1px solid black;
+}
+
+.linkDo {
+    background: rgba(255,255,255, 0.5);
+    padding: 0.5em 1em;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.linkDo:hover{
+    background: rgba(255,255,255, 0.8);
+}
+
+.pInfo {
+    background: rgba(255,170,0, 0.9);
+    padding: 1em;
+    border-radius: 8px;
+    transition: 0.2s;
+    margin: 10px auto;
+    width: 90%;
+    box-shadow: -3px -3px 9px 0px rgba(255, 236, 178, 0.95), 6px 6px 9px rgba(66, 46, 20, 0.95);
+}
+
+.wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+aside div {
+    background: rgba(255,170,0, 0.95);
+    padding: 16px;
+    margin: 16px;
+    box-shadow: -6px -6px 9px 0px rgba(255,255,179, 0.95), 6px 6px 9px rgba(54,35,0, 0.95);
+    border-radius: 16px;
+}
+
+article {
+    /*background: blue;*/
+    padding: 0 2em;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    margin: 8px;
+}
+
+.articleOneCol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.articleHome {
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.songCard {
+    background: rgba(255,170,0, 0.95);
+    margin: 12px;
+    margin-left: 24px;
+    padding: 8px;
+    display: grid;
+    grid-template-rows: 60% 9% 9% 9% 13%;
+    border-radius: 16px;
+    box-shadow: -3px -3px 9px 0px rgba(255, 236, 178, 0.95), 6px 6px 9px rgba(66, 46, 20, 0.95);
+    position: relative;
+}
+
+.cardEdit {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    border-radius: 8px;
+    padding: 0;
+    background: rgba(255,255,179, 0.5);
+}
+
+.songCard img {
+    width: 100%;
+    border-radius: 16px 16px 0 0;
+}
+
+.songImage {
+    border-bottom: 1px solid rgba(102,68,0, 0.9);
+    overflow: hidden;
+}
+
+.songTitle {
+    padding: 4px;
+    color: rgb(102,68,0);
+    font-weight: 700;
+}
+.songAuthor {
+    padding: 4px;
+    color: rgb(102,68,0);
+    font-weight: 500;
+    /*border: 1px solid green;*/
+}
+.songGenre {
+    padding: 4px;
+    color: rgb(102,68,0);
+    /*border: 1px solid blue;*/
+}
+
+.songAudio {
+    padding: 4px;
+    /*border: 1px solid black;*/
+}
+
+audio {
+    width: 97%;
+    height: 2em;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-panel {
+    background-color: rgb(255,255,179);   
+}
+
+footer {
+    background: rgba(54,35,0, 0.9);  
+}
+footer .container {
+    color: rgb(255,255,179);
+    text-align: center;
+}
+
+form {
+    background: rgba(255,170,0, 0.95);
+    padding: 32px;
+    width: 50%;
+    margin: 32px auto;
+    border-radius: 8px;
+    box-shadow: -3px -3px 9px 0px rgba(54,35,0, 0.95), 3px 3px 9px rgba(54,35,0, 0.95);
+    color: black;   
+}
+
+.form-group {
+    margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inFormGroup {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+form span {
+    padding: 8px;
+}
+
+input[type="text"], input[type="password"], input[type="email"], .mySelect {
+    border: none;
+    border-radius: 36px;
+    background: rgba(255,170,0, 0.95);
+    box-shadow: inset -3px -3px 9px 0px rgba(255, 236, 178, 0.95), inset 6px 6px 9px rgba(66, 46, 20, 0.4);
+    padding: 16px 16px;
+    transition: .4s;
+}
+
+
+
+.mySelect {
+   /*background: red;*/
+   width: 100%;
+}
+
+input[type="submit"] {
+    background: rgb(255,170,0);
+    border: none;
+    border-radius: 36px;
+    box-shadow: -3px -3px 9px 0px rgba(255, 236, 178, 0.95), 6px 6px 9px rgba(66, 46, 20, 0.95);
+    margin-top: 1em;
+    color: black;
+    padding: 0.5em 2em;
+    font-weight: 500;
+    font-size: 20px;
+    color: rgb(54,35,0);
+    transition: .4s;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, .mySelect:focus {
+    background: rgb(255,170,0);
+    box-shadow: inset -6px -6px 9px 0px rgba(255, 236, 178, 0.95), inset 9px 9px 9px rgba(66, 46, 20, 0.4);
+}
+
+input[type="submit"]:hover, .mySelect option:hover {
+    background: rgb(255,170,0);
+    box-shadow: -6px -6px 9px 0px rgba(255,255,179, 0.95), 9px 9px 9px rgba(54,35,0, 0.95);
+    color: rgb(54,35,0);
+}
+
+input[type="text"]::placeholder, input[type="email"]::placeholder, input[type="password"]::placeholder {
+    color: rgb(54,35,0);
+}
+
+input[type="file"] {
+    display: none;  
+}
+
+.customFileUpload {
+    margin: 1em 0;
+    color: black;
+    font-weight: 400;
+    font-size: 18px;
+    border-radius: 8px;
+    width: 100%;
+    padding: 1em;
+    font-weight: 400;
+    cursor: pointer;
+    background: rgba(255,170,0, 0.95);
+    box-shadow: inset -3px -3px 9px 0px rgba(255, 236, 178, 0.95), inset 6px 6px 9px rgba(66, 46, 20, 0.4);
+    transition: .4s;
+}
+
+.customFileUpload:hover {
+    box-shadow: inset -6px -6px 9px 0px rgba(255, 236, 178, 0.95), inset 9px 9px 9px rgba(66, 46, 20, 0.4);
+}
+
+.asideMenu{
+    margin: 20px;
+}
+
+.asideMenu div {
+    margin: 0;
+    padding: 20px 0;
+}
+.asideMenu ul{
+    margin: 1em 0;
+    padding: 0;
+}
+.asideMenu ul li {
+    list-style-type: none;
+    margin:   0;
+    padding: 0.5em ;
+}
+
+.asideMenu ul li a:hover {
+    border-bottom: 2px solid rgba(54,35,0, 0.5);
+}
+
+.asideMenu ul li a {
+    /*background: red;*/
+    padding: 4px;
+    border-bottom: 2px solid rgb(255,170,0);
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: rgb(102,68,0);
+    font-weight: 500;
+    transition: .4s;
+}
+
+span.material-symbols-outlined {
+    color: rgb(102,68,0);
+    font-size: 2em;
+    margin-right: 0.5em;
+}
+
+span.spanDelete {
+    margin: 0.5em;
+    font-size: 1.5em;
+}
+
+table{
+    background: rgba(255, 255, 255, 0.2);
+    width: 100%;
+    margin: 2em 0;
+    border-radius: 16px;
+}
+
+table tr td{
+    padding: 0.5em 1em;
+    text-align: center;
+}
+
+table tr:nth-child(2n+1){
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.orangeBack {
+    width: 80%;
+    background: rgba(255,170,0, 0.95);
+    box-shadow: -6px -6px 9px 0px rgba(255,255,179, 0.95), 6px 6px 9px rgba(54,35,0, 0.95);
+    border-radius: 8px;
+    padding: 1em;
+    margin: 1em;
+}
+
+.width100 {
+    width: 100%;
 }

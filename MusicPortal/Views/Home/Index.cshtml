@@ -1,15 +1,57 @@
-﻿@{
+﻿@model IEnumerable<MusicPortal.Models.Song>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@{
+    if (Context.Session.GetString("Email")==null)
+    {
+        <p class="pInfo">Реєструйся, щоб послухати більше</p>
+    }
+    else
+    {
+        <p class="pInfo">Ваш профіль на перевірці, зачекайте, будь-ласка</p>
+    }
+}
 
-    <p>
-        <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Registration">Регистрация</a>
-    </p>
-    <p>
-        <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Authorization">Авторизация</a>
-    </p>
+<div> 
+    <article class="articleHome">      
+            @foreach (var item in Model)
+            {
+                <div class="songCard">                   
+                    <div class="songImage">
+                        <img src="@Html.DisplayFor(e=>item.Image)" />
+                    </div>
+
+                    <div class="songTitle">
+                        <span>@Html.DisplayFor(e => item.Title)</span>
+                    </div>
+
+                    <div class="songAuthor">
+                        <span>@Html.DisplayFor(e => item.Author)</span>
+                    </div>
+
+                    <div class="songGenre">
+                        <span>@Html.DisplayFor(e => item.Genre.Title)</span>
+                    </div>
+
+                    <div class="songAudio">
+                        <audio controls muted loop src="@Html.DisplayFor(e=>item.Path)" />
+                    </div>              
+                </div>
+            }      
+    </article>
+   
 </div>
+
+
+
+
+
+
+
+
+
+
+

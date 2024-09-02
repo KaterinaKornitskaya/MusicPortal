@@ -11,7 +11,7 @@ namespace MusicPortal.Services
         {
             _context = context;
         }
-        public async Task Create(Genre entity)
+        public async Task Create(Genre entity, IFormFile? uploadedFile, IFormFile? uploadedFile2)
         {
            await _context.Genres.AddAsync(entity);
            await _context.SaveChangesAsync();
@@ -43,7 +43,7 @@ namespace MusicPortal.Services
             return genresList;
         }
 
-        public async Task<Genre> GetById(int id)
+        public async Task<Genre> GetById(int? id)
         {
             var genre = await _context.Genres.FirstOrDefaultAsync(e => e.Id == id);
             return genre;
@@ -58,6 +58,11 @@ namespace MusicPortal.Services
         {
             var genreList = _context.Genres.ToList();
             return genreList;
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            throw new NotImplementedException();
         }
     }
 }
